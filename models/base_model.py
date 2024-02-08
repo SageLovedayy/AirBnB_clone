@@ -3,7 +3,7 @@ from datetime import datetime
 import uuid
 
 """
-Module - BaseModel
+BaseModel module
 Parent class with common attributes/ methods
 """
 
