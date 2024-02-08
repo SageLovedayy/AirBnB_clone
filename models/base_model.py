@@ -15,9 +15,9 @@ class BaseModel():
     # public instance attributes
     def __init__(self, *args, **kwargs):
         """
-	Initializes instance with random unique id, time created and
-	time updated
-    	"""
+    Initializes instance with random unique id, time created and
+    time updated
+        """
         if kwargs:
             for key, value in kwargs.items():
                 if key == "__class__":
@@ -34,22 +34,22 @@ class BaseModel():
 
     def __str__(self):
         """
-    	returns details of instance
-    	"""
+        returns details of instance
+        """
         return ("[{}] ({}) {}".format(self.__class__.__name__,
                                       self.id, self.__dict__))
 
     # public instance methods
     def save(self):
         """
-    	updates time for instance
-    	"""
+        updates time for instance
+        """
         self.updated_at = datetime.now()
 
     def to_dict(self):
         """
-    	returns new dictionary with name, and time/date in isoformat
-    	"""
+        returns new dictionary with name, and time/date in isoformat
+        """
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = self.created_at.isoformat()
