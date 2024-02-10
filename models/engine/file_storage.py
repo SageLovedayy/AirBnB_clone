@@ -7,17 +7,17 @@ import json
 import os
 from models.base_model import BaseModel
 
-
 class FileStorage():
     """
     Serializes instances to a JSON file, deserializes JSON file to instances
     """
-    # Private class attributes
     __file_path = "file.json"
     __objects = {}
     __classes = {"BaseModel": BaseModel}
 
-    # Public instance methods
+    def __init__(self):
+        self.reload()
+
     def all(self):
         """
         Returns the dictionary __objects
@@ -59,5 +59,12 @@ class FileStorage():
                         else:
                             print(f"Warning: Class '{class_name}' not found.")
                         """
+
                 except json.JSONDecodeError:
                     pass
+
+    def get_classes(self):
+        """
+        Returns the dictionary of class names to classes
+        """
+        return self.__classes
