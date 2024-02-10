@@ -144,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """Exit the program when EOF (Ctrl+D) is encountered"""
-        print("")  # Print a newline for better formatting
+        print("")
         return True
 
     def help_EOF(self):
