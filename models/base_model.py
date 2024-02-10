@@ -16,8 +16,8 @@ class BaseModel():
     # public instance attributes
     def __init__(self, *args, **kwargs):
         """
-    Initializes instance with random unique id, time created and
-    time updated
+        Initializes instance with random unique id, time created and
+        time updated
         """
         if kwargs:
             for key, value in kwargs.items():

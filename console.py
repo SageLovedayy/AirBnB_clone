@@ -3,6 +3,7 @@
 console module
 """
 import cmd
+import os
 import shlex
 from models.engine.file_storage import FileStorage
 from models.user import User
@@ -149,6 +150,10 @@ class HBNBCommand(cmd.Cmd):
     def help_EOF(self):
         """Help documentation for EOF command"""
         print("EOF command: Exit the program (Ctrl+D)")
+
+    def do_clear(self, arg):
+        """Clear the console"""
+        os.system('cls' if os.name == 'nt' else 'clear')
 
 
 if __name__ == '__main__':

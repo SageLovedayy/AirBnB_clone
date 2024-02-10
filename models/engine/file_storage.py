@@ -4,7 +4,12 @@ FileStorage module
 """
 import json
 import os
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 from models.user import User
 
 
@@ -14,9 +19,14 @@ class FileStorage():
     """
     __file_path = "file.json"
     __objects = {}
-    __classes = {"BaseModel": BaseModel, "User": User}
+    __classes = {"BaseModel": BaseModel, "User": User, "Place": Place,
+                 "Amenity": Amenity, "City": City, "Review": Review,
+                 "State": State}
 
     def __init__(self):
+        """
+        instantiates with a call to reload
+        """
         self.reload()
 
     def all(self):
@@ -53,9 +63,9 @@ class FileStorage():
                     data = json.load(file)
                     for key, value in data.items():
                         class_name, obj_id = key.split('.')
-                        cls = self.__classes.get(class_name)
-                        if cls:
-                            self.__objects[key] = cls(**value)
+                        # cls = self.__classes.get(class_name)
+                        cls = self.__classes[class_name]
+                        self.__objects[key] = cls(**value)
                         """
                         else:
                             print(f"Warning: Class '{class_name}' not found.")

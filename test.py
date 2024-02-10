@@ -15,6 +15,7 @@ my_user.first_name = "Betty"
 my_user.last_name = "Bar"
 my_user.email = "airbnb@mail.com"
 my_user.password = "root"
+my_user.State = "Imo State"
 my_user.save()
 print(my_user)
 
