@@ -6,6 +6,7 @@ import uuid
 
 """
 BaseModel module
+
 Parent class with common attributes/ methods
 """
 
