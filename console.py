@@ -45,7 +45,6 @@ class HBNBCommand(cmd.Cmd):
         obj.save()
         print(obj.id)
 
-
     def do_show(self, arg):
         """Show the string representation of an instance"""
         args = shlex.split(arg)

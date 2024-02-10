@@ -9,8 +9,8 @@ class User(BaseModel):
     """
     def __init__(self, *args, **kwargs):
         """
-        Initializes user instance with email. password, first_name and last_name
-        attributes
+        Initializes user instance with email. password
+        , first_name and last_name attributes
         """
         super().__init__(*args, **kwargs)
         self.email = kwargs.get('email', "")
