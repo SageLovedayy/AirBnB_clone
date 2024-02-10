@@ -5,6 +5,7 @@ console module
 import cmd
 import shlex
 from models.engine.file_storage import FileStorage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -22,14 +23,28 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         if len(args) == 0:
             print("** class name missing **")
+            return
+
+        """
+        if len(args) == 1:
+            print(type(arg[1]))
+            return
+        """
 
         class_name = args[0]
         if class_name not in self.__classes:
             print("** class doesn't exist **")
+            return
 
         obj = self.__classes[class_name]()
+        """
+        obj = eval(args)()
+
+        print(type(obj))
+        """
         obj.save()
         print(obj.id)
+
 
     def do_show(self, arg):
         """Show the string representation of an instance"""
