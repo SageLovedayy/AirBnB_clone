@@ -6,6 +6,7 @@ import cmd
 import shlex
 from models.engine.file_storage import FileStorage
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for the AirBnB clone"""
 
@@ -83,7 +84,8 @@ class HBNBCommand(cmd.Cmd):
         if class_name not in self.__classes:
             print("** class doesn't exist **")
             return
-        print([str(obj) for key, obj in self.__storage.all().items() if key.split('.')[0] == class_name])
+        print([str(obj) for key, obj in self
+               .__storage.all().items() if key.split('.')[0] == class_name])
 
     def do_update(self, arg):
         """Update an instance based on the class name and id"""
@@ -135,6 +137,7 @@ class HBNBCommand(cmd.Cmd):
     def help_EOF(self):
         """Help documentation for EOF command"""
         print("EOF command: Exit the program (Ctrl+D)")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
