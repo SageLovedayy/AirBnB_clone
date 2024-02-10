@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
-import json
-import os
-
 """
 FileStorage module
 """
+
+from models.base_model import BaseModel
+import json
+import os
 
 
 class FileStorage():

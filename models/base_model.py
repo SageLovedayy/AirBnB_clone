@@ -1,14 +1,12 @@
 #!/usr/bin/python3
+"""
+BaseModel module
+Parent class with common attributes/ methods
+"""
+
 from datetime import datetime
 import models
 import uuid
-
-
-"""
-BaseModel module
-
-Parent class with common attributes/ methods
-"""
 
 
 class BaseModel():
