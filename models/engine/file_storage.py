@@ -3,36 +3,37 @@
 FileStorage module
 """
 
-from models.base_model import BaseModel
 import json
 import os
+from models.base_model import BaseModel
 
 
 class FileStorage():
     """
-    serializes instances to a JSON file, deserializes JSON file to instances
+    Serializes instances to a JSON file, deserializes JSON file to instances
     """
-    # private class attributes
+    # Private class attributes
     __file_path = "file.json"
     __objects = {}
+    __classes = {"BaseModel": BaseModel}
 
-    # public instance methods
+    # Public instance methods
     def all(self):
         """
-        returns the dictionary, __objects
+        Returns the dictionary __objects
         """
-        return (self.__objects)
+        return self.__objects
 
     def new(self, obj):
         """
-        stores new object by <class name>.id in the __objects dictionary
+        Stores new object by <class name>.id in the __objects dictionary
         """
         key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
 
     def save(self):
         """
-        serializes __objects to the JSON file
+        Serializes __objects to the JSON file
         """
         serialized_objects = {}
         for key, obj in self.__objects.items():
@@ -43,7 +44,7 @@ class FileStorage():
 
     def reload(self):
         """
-        deserializes JSON file to __objects
+        Deserializes JSON file to __objects
         """
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, 'r') as file:
@@ -51,8 +52,12 @@ class FileStorage():
                     data = json.load(file)
                     for key, value in data.items():
                         class_name, obj_id = key.split('.')
-                        cls = globals()[class_name]
-                        self.__objects[key] = cls(**value)
-
+                        cls = self.__classes.get(class_name)
+                        if cls:
+                            self.__objects[key] = cls(**value)
+                        """
+                        else:
+                            print(f"Warning: Class '{class_name}' not found.")
+                        """
                 except json.JSONDecodeError:
                     pass
