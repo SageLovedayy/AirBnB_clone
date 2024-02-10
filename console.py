@@ -22,12 +22,10 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         if len(args) == 0:
             print("** class name missing **")
-            return
 
         class_name = args[0]
         if class_name not in self.__classes:
             print("** class doesn't exist **")
-            return
 
         obj = self.__classes[class_name]()
         obj.save()
