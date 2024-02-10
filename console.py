@@ -17,9 +17,11 @@ class HBNBCommand(cmd.Cmd):
         """Exit prgram when EOF (Ctrl+D) is encountered"""
         print("")
         return (True)
+
     def emptyline(self):
         """Do nothing when an empty line is entered"""
         pass
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
