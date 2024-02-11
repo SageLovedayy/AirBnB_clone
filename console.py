@@ -15,7 +15,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def __init__(self):
-        """initializes instance"""
+        """initializes"""
         super().__init__()
         self.__storage = FileStorage()
         self.__classes = self.__storage.get_classes()
