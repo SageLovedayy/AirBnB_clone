@@ -5,6 +5,7 @@ Unittest for console command interpreter
 import unittest
 from unittest.mock import patch
 from io import StringIO
+import pep8
 import os
 import json
 import console
@@ -34,6 +35,23 @@ class TestConsole(unittest.TestCase):
             os.remove("file.json")
         except Exception:
             pass
+
+    """Check for Pep8 style conformance"""
+    def test_pep8_console(self):
+        """Pep8 console.py"""
+        style = pep8.StyleGuide(quiet=False)
+        errors = 0
+        file = (["console.py"])
+        errors += style.check_files(file).total_errors
+        self.assertEqual(errors, 0, 'Need to fix Pep8')
+
+    def test_pep8_test_console(self):
+        """Pep8 test_console.py"""
+        style = pep8.StyleGuide(quiet=False)
+        errors = 0
+        file = (["tests/test_console.py"])
+        errors += style.check_files(file).total_errors
+        self.assertEqual(errors, 0, 'Need to fix Pep8')
 
     """Check for docstring existance"""
     def test_docstrings_in_console(self):

@@ -3,3 +3,4 @@ chk
 serial-create-vi-files.sh
 pycodestyle.sh
 file.json
+tests

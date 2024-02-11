@@ -23,40 +23,40 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Create a new instance of BaseModel"""
-        # args = shlex.split(arg)
-        if len(arg) == 0:
+        args = shlex.split(arg)
+        if len(args) == 0:
             print("** class name missing **")
             return
 
-        elif arg not in self.__classes:
-            print("** class doesn't exist **")
+        # elif args not in self.__classes:
+        #    print("** class doesn't exist **")
 
-        else:
-            # print("why??????")
-            # print(type(arg))
-            instance = eval(arg)()
-            instance.save()
-            print(instance.id)
+        # else:
+        #    # print("why??????")
+        #    # print(type(arg))
+        #    instance = eval(arg)()
+        #    instance.save()
+        #    print(instance.id)
         """
         if len(args) == 1:
             print(type(arg[1]))
             return
         """
 
-        # class_name = args[0]
-        # if class_name not in self.__classes:
-        #    print("** class doesn't exist **")
-        #    return
+        class_name = args[0]
+        if class_name not in self.__classes:
+            print("** class doesn't exist **")
+            return
 
-        # obj = self.__classes[class_name]()
+        obj = self.__classes[class_name]()
         """
         obj = eval(args)()
 
         print(type(obj))
         """
         # ===============
-        # obj.save()
-        # print(obj.id)
+        obj.save()
+        print(obj.id)
 
     def do_show(self, arg):
         """Show the string representation of an instance"""
@@ -109,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
         if class_name not in self.__classes:
             print("** class doesn't exist **")
             return
-        print([str(obj) for key, obj in self
+        print([obj for key, obj in self
                .__storage.all().items() if key.split('.')[0] == class_name])
 
     def do_update(self, arg):
@@ -166,6 +166,63 @@ class HBNBCommand(cmd.Cmd):
     def do_clear(self, arg):
         """Clear the console"""
         os.system('cls' if os.name == 'nt' else 'clear')
+
+    def default(self, line):
+        """Accepts class name followed by arguement"""
+        args = line.split('.')
+        class_arg = args[0]
+        if len(args) == 1:
+            print("*** Unknown syntax: {}".format(line))
+            return
+        try:
+            args = args[1].split('(')
+            command = args[0]
+            if command == 'all':
+                HBNBCommand.do_all(self, class_arg)
+            elif command == 'count':
+                HBNBCommand.do_count(self, class_arg)
+            elif command == 'show':
+                args = args[1].split(')')
+                id_arg = args[0]
+                id_arg = id_arg.strip("'")
+                id_arg = id_arg.strip('"')
+                arg = class_arg + ' ' + id_arg
+                HBNBCommand.do_show(self, arg)
+            elif command == 'destroy':
+                args = args[1].split(')')
+                id_arg = args[0]
+                id_arg = id_arg.strip('"')
+                id_arg = id_arg.strip("'")
+                arg = class_arg + ' ' + id_arg
+                HBNBCommand.do_destroy(self, arg)
+            elif command == 'update':
+                args = args[1].split(',')
+                id_arg = args[0].strip("'")
+                id_arg = id_arg.strip('"')
+                name_arg = args[1].strip(',')
+                val_arg = args[2]
+                name_arg = name_arg.strip(' ')
+                name_arg = name_arg.strip("'")
+                name_arg = name_arg.strip('"')
+                val_arg = val_arg.strip(' ')
+                val_arg = val_arg.strip(')')
+                arg = class_arg + ' ' + id_arg + ' ' + name_arg + ' ' + val_arg
+                HBNBCommand.do_update(self, arg)
+            else:
+                print("*** Unknown syntax: {}".format(line))
+        except IndexError:
+            print("*** Unknown syntax: {}".format(line))
+
+    def do_count(self, line):
+        """Display count of instances specified"""
+        if line in self.__classes:
+            count = 0
+            for key, objs in self.__storage.all().items():
+                if line in key:
+                    count += 1
+            print(count)
+        else:
+            print("** class doesn't exist **")
 
 
 if __name__ == '__main__':
