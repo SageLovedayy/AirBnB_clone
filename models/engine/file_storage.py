@@ -39,8 +39,9 @@ class FileStorage():
         """
         Stores new object by <class name>.id in the __objects dictionary
         """
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj
+        if obj:
+            key = f"{obj.__class__.__name__}.{obj.id}"
+            self.__objects[key] = obj
 
     def save(self):
         """
