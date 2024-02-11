@@ -112,6 +112,9 @@ class HBNBCommand(cmd.Cmd):
         print([obj for key, obj in self
                .__storage.all().items() if key.split('.')[0] == class_name])
 
+        # print([str(obj) for key, obj in self
+        #       .__storage.all().items() if key.split('.')[0] == class_name])
+
     def do_update(self, arg):
         """Update an instance based on the class name and id"""
         args = shlex.split(arg)
@@ -163,16 +166,16 @@ class HBNBCommand(cmd.Cmd):
         """Help documentation for EOF command"""
         print("EOF command: Exit the program (Ctrl+D)")
 
-    def do_clear(self, arg):
+    def do_clear(self):
         """Clear the console"""
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    def default(self, line):
-        """Accepts class name followed by arguement"""
-        args = line.split('.')
+    def default(self, arg):
+        """Allows the use of class name before argument"""
+        args = arg.split('.')
         class_arg = args[0]
         if len(args) == 1:
-            print("*** Unknown syntax: {}".format(line))
+            print("*** Unknown syntax: {}".format(arg))
             return
         try:
             args = args[1].split('(')
@@ -209,9 +212,9 @@ class HBNBCommand(cmd.Cmd):
                 arg = class_arg + ' ' + id_arg + ' ' + name_arg + ' ' + val_arg
                 HBNBCommand.do_update(self, arg)
             else:
-                print("*** Unknown syntax: {}".format(line))
+                print("*** Unknown syntax: {}".format(arg))
         except IndexError:
-            print("*** Unknown syntax: {}".format(line))
+            print("*** Unknown syntax: {}".format(arg))
 
     def do_count(self, line):
         """Display count of instances specified"""
