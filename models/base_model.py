@@ -66,6 +66,6 @@ class BaseModel():
                 new_dict[key] = value.isoformat()
             else:
                 new_dict[key] = value
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
+        # new_dict["created_at"] = self.created_at.isoformat()
+        # new_dict["updated_at"] = self.updated_at.isoformat()
         return (new_dict)
