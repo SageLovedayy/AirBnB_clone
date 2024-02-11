@@ -209,7 +209,8 @@ class HBNBCommand(cmd.Cmd):
             #    name_arg = name_arg.strip('"')
             #    val_arg = val_arg.strip(' ')
             #    val_arg = val_arg.strip(')')
-            #    arg = class_arg + ' ' + id_arg + ' ' + name_arg + ' ' + val_arg
+            #    arg = class_arg + ' ' + id_arg
+            #   + ' ' + name_arg + ' ' + val_arg
             #    HBNBCommand.do_update(self, arg)
             elif command == 'update':
                 args = args[1].split(',')
