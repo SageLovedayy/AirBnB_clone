@@ -59,8 +59,8 @@ class BaseModel():
         """
         returns new dictionary with name, and time/date in isoformat
         """
-        #new_dict = self.__dict__.copy()
-        new_dict ={}
+        # new_dict = self.__dict__.copy()
+        new_dict = {}
         new_dict["__class__"] = self.__class__.__name__
         for key, value in self.__dict__.items():
             if isinstance(value, (datetime, )):
