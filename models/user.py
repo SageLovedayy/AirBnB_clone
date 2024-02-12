@@ -18,5 +18,5 @@ class User(BaseModel):
         self.first_name = kwargs.get('first_name', "")
         self.last_name = kwargs.get('last_name', "")
 
-    #state_id = ""
-    #name = ""
+    # state_id = ""
+    # name = ""

@@ -170,41 +170,11 @@ class HBNBCommand(cmd.Cmd):
         """Clear the console"""
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    # def default(self, line):
-    #    """default method to use with command()"""
-    #    line = line.replace('(', ' ').replace(')', ' ').replace('.', ' ')
-    #    line = line.replace(',', '').replace("'", '').replace('"', '')
-    #    args = line.split(" ")
-    #    args.remove("")
-    #    if len(args) > 1:
-    #        cmd = args[1]
-    #        args.remove(cmd)
-    #    if cmd == "update":
-    #        if "{" in line:
-    #            line = line.replace('{', '').replace('}', '').replace(':', '')
-    #            args = line.split(" ")
-    #            args.remove("")
-    #            static = args[0] + " " + args[2]
-    #            while len(args) >= 5:
-    #                variable = args[3] + " " + args[4]
-    #                args.remove(args[3])
-    #                args.remove(args[3])
-    #                argument = static + " " + variable
-    #                eval('self.do_update' + '(argument)')
-    #            return
-    #    argument = ""
-    #    for arg in args:
-    #        argument = argument + arg + " "
-    #    try:
-    #        eval('self.do_' + cmd + '(argument)')
-    #    except:
-    #        print("** invalid command **")
-
-    def default(self, line):
-        """default method to use with command()"""
-        line = line.replace('(', ' ').replace(')', ' ').replace('.', ' ')
-        line = line.replace(',', '').replace("'", '').replace('"', '')
-        args = line.split(" ")
+    def default(self, arg):
+        """default- allows method call on class e.g User.all())"""
+        arg = arg.replace('(', ' ').replace(')', ' ').replace('.', ' ')
+        arg = arg.replace(',', '').replace("'", '').replace('"', '')
+        args = arg.split(" ")
         args = [arg for arg in args if arg]  # Remove empty strings from list
         if len(args) > 1:
             cmd = args[1]
@@ -231,19 +201,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** invalid command **")
 
-    # def do_count(self, line):
-    #    """Display count of instances specified"""
-    #    if line in self.__classes:
-    #        count = 0
-    #        for key, objs in self.__storage.all().items():
-    #            if line in key:
-    #                count += 1
-    #        print(count)
-    #    else:
-    #        print("** class doesn't exist **")
-    def do_count(self, line):
+    def do_count(self, arg):
         """retrieve the number of instances of a class"""
-        args = line.split()
+        args = arg.split()
         objects_dic = self.__storage.all()
         if len(args) == 0:
             print("** class name missing **")

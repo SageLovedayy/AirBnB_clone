@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """
-Unittest to test FileStorage class
+Unit tests for the FileStorage class
 """
 import unittest
 import pep8
-import json
 import os
 from models.base_model import BaseModel
 from models.user import User
@@ -17,26 +16,31 @@ from models.engine.file_storage import FileStorage
 
 
 class TestFileStorage(unittest.TestCase):
-    '''testing file storage'''
+    '''
+    Testing the FileStorage class.
+    '''
 
     @classmethod
     def setUpClass(cls):
+        """
+        Set up class instance
+        """
         cls.rev1 = Review()
-        cls.rev1.place_id = "Raleigh"
-        cls.rev1.user_id = "Greg"
-        cls.rev1.text = "Grade A"
+        cls.rev1.place_id = "Housto"
+        cls.rev1.user_id = "Sage"
+        cls.rev1.text = "Fast"
 
     @classmethod
-    def teardown(cls):
+    def tearDownClass(cls):
+        """
+        Clean up resources
+        """
         del cls.rev1
 
-    # def teardown(self):
-    #    try:
-    #        os.remove("file.json")
-    #    except:
-    #        pass
-
-    def teardown(self):
+    def tearDown(self):
+        """
+        Clean up method to remove the 'file.json' if it exists
+        """
         try:
             os.remove("file.json")
         except FileNotFoundError:
@@ -74,12 +78,11 @@ class TestFileStorage(unittest.TestCase):
         """
         m_storage = FileStorage()
         instances_dic = m_storage.all()
-        melissa = User()
-        melissa.id = 999999
-        melissa.name = "Melissa"
-        m_storage.new(melissa)
-        key = melissa.__class__.__name__ + "." + str(melissa.id)
-        # print(instances_dic[key])
+        johndoe = User()
+        johndoe.id = 999999
+        johndoe.name = "Johndoe"
+        m_storage.new(johndoe)
+        key = johndoe.__class__.__name__ + "." + str(johndoe.id)
         self.assertIsNotNone(instances_dic[key])
 
     def test_reload(self):
@@ -87,28 +90,13 @@ class TestFileStorage(unittest.TestCase):
         Tests method: reload (reloads objects from string file)
         """
         a_storage = FileStorage()
-        # try:
-        #    os.remove("file.json")
-        # except:
-        #    pass
-
-        def teardown(self):
-            try:
-                os.remove("file.json")
-            except FileNotFoundError:
-                # The file doesn't exist, nothing to remove
-                pass
-            except PermissionError:
-                # Permission denied when trying to remove the file
-                # Handle this according to your application's logic
-                print("Permission denied when trying to remove file.json")
-            except Exception as e:
-                # Catch any other unexpected exceptions & handle appropriately
-                print(f"An error occurred: {e}")
-
         with open("file.json", "w") as f:
             f.write("{}")
         with open("file.json", "r") as r:
             for line in r:
                 self.assertEqual(line, "{}")
         self.assertIs(a_storage.reload(), None)
+
+
+if __name__ == "__main__":
+    unittest.main()
