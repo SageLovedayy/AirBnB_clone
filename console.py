@@ -170,12 +170,42 @@ class HBNBCommand(cmd.Cmd):
         """Clear the console"""
         os.system('cls' if os.name == 'nt' else 'clear')
 
+    # def default(self, line):
+    #    """default method to use with command()"""
+    #    line = line.replace('(', ' ').replace(')', ' ').replace('.', ' ')
+    #    line = line.replace(',', '').replace("'", '').replace('"', '')
+    #    args = line.split(" ")
+    #    args.remove("")
+    #    if len(args) > 1:
+    #        cmd = args[1]
+    #        args.remove(cmd)
+    #    if cmd == "update":
+    #        if "{" in line:
+    #            line = line.replace('{', '').replace('}', '').replace(':', '')
+    #            args = line.split(" ")
+    #            args.remove("")
+    #            static = args[0] + " " + args[2]
+    #            while len(args) >= 5:
+    #                variable = args[3] + " " + args[4]
+    #                args.remove(args[3])
+    #                args.remove(args[3])
+    #                argument = static + " " + variable
+    #                eval('self.do_update' + '(argument)')
+    #            return
+    #    argument = ""
+    #    for arg in args:
+    #        argument = argument + arg + " "
+    #    try:
+    #        eval('self.do_' + cmd + '(argument)')
+    #    except:
+    #        print("** invalid command **")
+
     def default(self, line):
         """default method to use with command()"""
         line = line.replace('(', ' ').replace(')', ' ').replace('.', ' ')
         line = line.replace(',', '').replace("'", '').replace('"', '')
         args = line.split(" ")
-        args.remove("")
+        args = [arg for arg in args if arg]  # Remove empty strings from list
         if len(args) > 1:
             cmd = args[1]
             args.remove(cmd)
@@ -183,7 +213,7 @@ class HBNBCommand(cmd.Cmd):
             if "{" in line:
                 line = line.replace('{', '').replace('}', '').replace(':', '')
                 args = line.split(" ")
-                args.remove("")
+                args = [arg for arg in args if arg]  # Rmv empty strs frm list
                 static = args[0] + " " + args[2]
                 while len(args) >= 5:
                     variable = args[3] + " " + args[4]
@@ -195,23 +225,35 @@ class HBNBCommand(cmd.Cmd):
         argument = ""
         for arg in args:
             argument = argument + arg + " "
-        try:
-            eval('self.do_' + cmd + '(argument)')
-        except:
+        cmd_function = getattr(self, 'do_' + cmd, None)
+        if cmd_function:
+            cmd_function(argument)
+        else:
             print("** invalid command **")
 
-
+    # def do_count(self, line):
+    #    """Display count of instances specified"""
+    #    if line in self.__classes:
+    #        count = 0
+    #        for key, objs in self.__storage.all().items():
+    #            if line in key:
+    #                count += 1
+    #        print(count)
+    #    else:
+    #        print("** class doesn't exist **")
     def do_count(self, line):
-        """Display count of instances specified"""
-        if line in self.__classes:
-            count = 0
-            for key, objs in self.__storage.all().items():
-                if line in key:
-                    count += 1
-            print(count)
-        else:
+        """retrieve the number of instances of a class"""
+        args = line.split()
+        objects_dic = self.__storage.all()
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.__classes:
             print("** class doesn't exist **")
-
+        count = 0
+        for i in objects_dic:
+            if objects_dic[i].__class__.__name__ == args[0]:
+                count += 1
+        print(count)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
