@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 **AirBnB clone - The console**
-=======
-**AirBnB clone - The console**
->>>>>>>
 
 ### Introduction
 
