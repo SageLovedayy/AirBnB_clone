@@ -1,8 +1,8 @@
 <<<<<<< HEAD
-** AirBnB clone - The console **
+**AirBnB clone - The console**
 =======
 **AirBnB clone - The console**
->>>>>>> f7a4f2c613d1867dfc4959cf1093506e3ce9f527
+>>>>>>>
 
 ### Introduction
 
