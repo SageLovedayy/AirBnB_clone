@@ -7,3 +7,4 @@ chk_firstline.py
 __pycache__
 W3C-Validator
 w3c_validator.py
+*.sh

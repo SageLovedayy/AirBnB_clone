@@ -16,7 +16,7 @@ This repository contains the codebase for an AirBnB clone, including a command-l
 1. **Installation**: Clone this repository to your local machine.
 
    ```bash
-   git clone https://github.com/Gloriaisuwa/AirBnB_clone.git
+   git clone https://github.com/SageLovedayy/AirBnB_clone.git
    ```
 
 2. **Setup**: Ensure you have Python installed on your machine. Install any necessary dependencies.
