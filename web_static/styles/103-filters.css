@@ -1,9 +1,9 @@
 .filters {
   background-color: white;
-  height: 70px;
+  height: 7rem;
   width: 100%;
   border: 1px solid #dddddd;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   position: relative;
   display: flex;
 }
@@ -28,24 +28,24 @@
 
 .locations h3,
 .amenities h3 {
-  margin-top: 22px;
+  margin-top: 2.2rem;
 }
 
 .popover {
   background-color: #fafafa;
   border: 1px solid #dddddd;
-  border-radius: 4px;
-  padding-top: 20px;
-  padding-bottom: 30px;
+  border-radius: 0.4rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
   display: none;
   z-index: 1;
   position: relative;
 }
 
 .popover li h2 {
-  font-size: 16px;
+  font-size: 1.6rem;
   margin: 0;
-  margin-top: 25px;
+  margin-top: 2.5rem;
 }
 ul {
   list-style-type: none;
